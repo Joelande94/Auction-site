@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    Confirm
+{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+
+{% block content %}
+    <center>
+    <h1>Create auction - Confirm</h1>
+    </center>
+    <form action="/create_auction/" id="addform" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {% autoescape on %}
+            Title: <br> {{ form_title }}
+            <input type="hidden" name="title" value="{{ form_title }}">
+            <br><br>
+            Description: <br>{{ form_description }}
+            <input type="hidden" name="description" value="{{ form_description }}">
+            <br><br>
+            Deadline:<br>{{ form_deadline }}
+            <input type="hidden" name="deadline" value={{ form_deadline }}>
+            <br><br>
+            Price: {{ form_price }}
+            <input type="hidden" name="price" value={{ form_price }}>
+            <br><hr>Are you sure you want to create this auction?
+            <br>
+            <input type="radio" name="confirm_create" value="yes">Yes
+            <input type="radio" name="confirm_create" value="no">No
+            <input type="submit" name="Submit">
+        {% endautoescape %}
+    </form>
+{% endblock %}

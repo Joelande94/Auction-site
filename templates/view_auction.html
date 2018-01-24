@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tz %}
+
+{% block title%}
+    Auction
+{% endblock %}
+
+{% block message %}
+    {{ message }}
+{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+{% block content %}
+    <center>
+        <h1>YAAS</h1>
+        <br><h1>view auction</h1><hr>
+    </center>
+    <h2>{{ auction.title }}</h2>
+    {{ auction.description }}
+    {% localtime on %}
+    <p>Deadline: {{ auction.deadline }}</p>
+    {% endlocaltime %}
+    <p>Current bid: {{ auction.current_bid }}€</p>
+    <p>Seller: {{ auction.seller }}</p>
+    <form action="/bid_auction/{{ auction.pk }}" method="post">
+    {% csrf_token %}
+        {{ form.bid }}
+    <button type="submit" class="btn-link">Bid</button>
+    {% if auction.owner == user_id %}
+        <form action="/edit_auction/{{ auction.pk }}" method="get">
+        <button type="submit" class="btn-link">Edit</button>
+        </form>
+    {% endif %}
+    <hr><br>
+    {% block footer %}
+        <br><br>
+    {% endblock %}
+{% endblock %}

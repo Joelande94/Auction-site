@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block message %}{{ message }}{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+{% block content %}
+    <font style="color:white">
+        <h1>YAAS</h1>
+            <br>
+        <h1>edit account</h1>
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        <form action="/edit_email/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            Current email: {{ email }}<br>
+            New email:<br><input type="text" name="email" ><br>
+            <button type="submit"  class="btn btn-success">Submit</button>
+        </form>
+        <hr>
+        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            Enter your old password: <br>{{ form.old_password }}<br><hr>
+            Enter your new password: <br>{{ form.new_password }}<br>
+            Enter your new password again: <br>{{ form.new_password2 }}<br>
+            <button type="submit" class="btn btn-success">Submit</button>
+</form>
+    </font>
+
+{% endblock %}

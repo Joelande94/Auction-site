@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load staticfiles %}
+
+<html lang={{ language }}>
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "css/default.css" %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <h4 style="color:red">
+    {% block message %}{% endblock %}
+    </h4>
+
+    <div id="page">
+        <div id="sidebar">
+            {% block sidebar %}
+                <h3>
+                    <ul>
+                        {% if username %}
+                            {% autoescape on %}
+                                <!-- <font style="color:antiquewhite">{% trans welcome %}{{ username }}!</font>
+                                <br><font size="3"><a href="/accounts/edit/">{% trans edit_account %}</a></font>
+                                <br><font size="3"><a href="/accounts/auctions/">{% trans my_auctions %}</a></font>-->
+                                <font style="color:antiquewhite">Welcome {{ username }}!</font>
+                                <br><font size="3"><a href="/accounts/edit/">Edit account</a></font>
+                                <br><font size="3"><a href="/accounts/auctions/">My auctions</a></font>
+                            {% endautoescape %}
+                            <p><a href="/accounts/logout/">Logout</a></p>
+
+                        {% endif %}
+                        <!-- <li><a href="/homepage/">{% trans homepage %}</a></li>
+                        <li><a href="/auctions/">{% trans all_auctions %}</a></li>
+                        <li><a href="/create_auction/">{% trans add_auction %}</a></li>
+                        <li><a href="/delete/">{% trans delete_auction %}</a></li>
+                        <li><a href="/admin/">{% trans admin %}</a></li>
+                        <br>
+                        <li><a href="/accounts/login/">{% trans log_in %}</a></li>
+                        <li><a href="/register/">{% trans register %}</a></li>-->
+                        <li><a href="/homepage/">Homepage</a></li>
+                        <li><a href="/create_auction/">Add auction</a></li>
+                        <li><a href="/admin/">Admin</a></li>
+                        <br>
+                        <li><a href="/accounts/login/">Log in</a></li>
+                        <li><a href="/register/">Register</a></li>
+                    </ul>
+                    <font style="color:white">Languages:</font>
+                    <ul>
+                        <li><a href="/language/en/">English</a></li>
+                        <li><a href="/language/fi/">Finnish</a></li>
+                        <li><a href="/language/sv">Swedish</a></li>
+                    </ul>
+                </h3>
+            {% endblock %}
+
+            <h4>Session Language is: {% block session_language %}{% endblock %}</h4>
+        </div>
+
+        <center>
+        <div id="content">
+            {% autoescape on %}
+            {% block content %}
+                <div id="footer">
+                    {% block footer %}
+                        <br><br>
+                        <!--
+                        Session start: {{ session_start }} <br>
+                        Blogs visited: {{ session_visited }} <br>
+                        Blogs edited:  {{ session_edited }} <br>
+                        Blogs created: {{ session_created }} <br>
+                        Blogs deleted: {{ session_deleted }} <br>
+                        <form action="/reset_session/" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-link">Reset session values</button>
+                        </form>
+                        -->
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            {% endautoescape %}
+        </div>
+        </center>
+
+    </div>
+</body>
+</html>

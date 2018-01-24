@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tz %}
+
+{% block title%}
+    My auctions
+{% endblock %}
+
+{% block message %}
+    {{ message }}
+{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+{% block content %}
+        <!--
+        <center><h1>{% trans home %}</h1><hr></center>
+        -->
+        <center><h1>My Auctions</h1><hr></center>
+        {% for auction in auctions %}
+            <h2>{{ auction.title }}</h2>
+            <h3>{{ auction.startDate }}</h3>
+            {{ auction.description }}
+            {% localtime on %}
+            <p>Deadline: {{ auction.deadline }}</p>
+            {% endlocaltime %}
+            <p>Current bid: {{ auction.current_bid }}€</p>
+            {% if auction.state == "BANNED" %}
+                <p><h2 style="color:red">This auction has been banned by an administrator</h2></p>
+            {% endif %}
+            <form action="/edit_auction/{{ auction.pk }}" method="get">
+            <button type="submit" class="btn-link">Edit auction</button>
+            </form>
+            <form action="/delete_auction/{{ auction.pk }}" method="get">
+            <button type="submit" style="float: right" class="btn-link">Delete auction</button>
+            </form>
+            <br><hr><br>
+        {% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tz %}
+
+{% block title %}
+    MyBlog - editblog
+{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+
+{% block content %}
+    <center>
+    <h1>Create auction</h1>
+    </center>
+    <form action="/rest_test/" id="addform" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {% autoescape on %}
+            Title: <br> {{ form.title }}
+            <br><br>
+            Description: <br>{{ form.description }}
+            <br><br>
+            Length in hours:<br>{{ form.deadline }}
+            <br><br>
+            Price: {{ form.price }}
+            <input type="submit" name="Submit">
+        {% endautoescape %}
+    </form>
+{% endblock %}

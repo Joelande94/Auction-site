@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    Edit auction
+{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+
+{% block content %}
+    <center>
+    <h1>Edit auction</h1>
+    </center>
+    <form action="/edit_auction/" id="editform" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {% autoescape on %}
+            Title: <br> {{ form.title }}
+            <br><br>
+            Description: <br>{{ form.description }}
+            <br><br>
+            Length in hours:<br>{{ form.deadline }}
+            <input type="submit" name="Submit">
+        {% endautoescape %}
+    </form>
+
+{% endblock %}

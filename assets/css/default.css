@@ -1,0 +1,39 @@
+body{
+    text-align: center;
+    background-image: url("http://1.bp.blogspot.com/-hrGFLyJba3U/Uh90QVFp01I/AAAAAAAAFoY/F5R7LBbTox0/s1600/Background-Picture-Html.jpg");
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+}
+h1{ color:white }
+h2{ color:white }
+h3{ color:white }
+h4{ color:white }
+textarea{
+    text-align: left;
+}
+a:link{
+    color: antiquewhite;
+}
+#page {
+    width: 80%;
+    text-align: left;
+    margin: 1% auto 2% auto;
+}
+#sidebar{
+    position: fixed;
+    float: left;
+    width: 16%;
+}
+#content {
+    width: 50%;
+    padding: 1%;
+    text-align: left;
+    color: white;
+}
+#content a, #sidebar a{
+    color: white;
+}
+
+#footer {
+    color: white;
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tz %}
+
+{% block title%}
+    Search
+{% endblock %}
+
+{% block message %}
+    {{ message }}
+{% endblock %}
+
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+{% block content %}
+        <center><h1>YAAS</h1>
+            <br><h1>Search</h1><hr></center>
+        <br>
+        <form action="/search/" method="post">
+            {% csrf_token %}
+            <input type="text" name="query">
+            <button type="submit" class="btn-link">Search</button>
+        </form>
+        <hr>
+
+        {% for auction in auctions %}
+            <h2>{{ auction.title }}</h2>
+            <h3>{{ auction.startDate }}</h3>
+            {{ auction.description }}
+            {% localtime on %}
+            <p>Deadline: {{ auction.deadline }}</p>
+            {% endlocaltime %}
+            <p>Current bid: {{ auction.current_bid }}€</p>
+            <p>Seller: {{ auction.seller }}</p>
+            <form action="/view_auction/{{ auction.pk }}" method="get">
+            <button type="submit" class="btn-link">View auction</button>
+        </form>
+            <hr><br>
+        {% endfor %}
+{% endblock %}

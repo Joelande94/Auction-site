@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    Create auction
+{% endblock %}
+
+{% block message %}{{ message }}{% endblock %}
+{% block language %}{{ language }}{% endblock %}
+{% block session_language %}{{ session_language }}{% endblock %}
+
+
+{% block content %}
+    <center>
+    <h1>YAAS</h1>
+    <br><h1>create auction</h1><hr>
+    </center>
+    <form action="/create_auction/" id="addform" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {% autoescape on %}
+            Title: <br> {{ form.title }}
+            <br><br>
+            Description: <br>{{ form.description }}
+            <br><br>
+            Length in hours:<br>{{ form.deadline }}
+            <br><br>
+            Price: {{ form.price }}
+            <input type="submit" name="Submit">
+        {% endautoescape %}
+    </form>
+{% endblock %}
